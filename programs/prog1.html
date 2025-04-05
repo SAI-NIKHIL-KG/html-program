@@ -1,0 +1,64 @@
+<h1>PROGRAM 1</h1>
+<P>
+    #define INF 999<br/>
+#define MAX 100<br/>
+int p[MAX], c[MAX][MAX], t[MAX][2];<br/>
+int find(int v)<br/>
+{<br/>
+    while (p[v])<br/>
+        v = p[v];<br/>
+    return v;<br/>
+}<br/>
+void union1(int i, int j)<br/>
+{<br/>
+    p[j] = i;<br/>
+}<br/>
+void kruskal(int n)<br/>
+{<br/>
+    int i, j, k, u, v, min, res1, res2, sum = 0;<br/>
+    for (k = 1; k < n; k++)<br/>
+    {<br/>
+        min = INF;<br/>
+        for (i = <br/>
+            for (j = 1; j <= n; j++)<br/>
+            {<br/>
+                if (i == j) continue;<br/>
+                if (c[i][j] < min)<br/>
+                {<br/>
+                    u = find(i);<br/>
+                    v = find(j);<br/>
+                    if (u != v)<br/>
+                    {<br/>
+                        res1 = i;<br/>
+                        res2 = j;<br/>
+                        min = c[i][j];<br/>
+                    }<br/>
+                }<br/>
+            }<br/>
+        }<br/>
+        union1(res1, find(res2));<br/>
+        t[k][1] = res1;<br/>
+        t[k][2] = res2;<br/>
+        sum = sum + min;<br/>
+    }<br/>
+    printf("\nCost of spanning tree is=%d", sum);<br/>
+    printf("\nEdgesof spanning tree are:\n");<br/>
+    for (i = 1; i < n; i++)<br/>
+        printf("%d -> %d\n", t[i][1], t[i][2]);<br/>
+}<br/>
+int main()<br/>
+{<br/>
+    int i, j, n;<br/>
+    printf("\nEnter the n value:");<br/>
+    scanf("%d", & n);<br/>
+    for (i = 1; i <= n; i++)<br/>
+        p[i] = 0;<br/>
+    printf("\nEnter the graph data:\n");<br/>
+    for (i = 1; i <= n; i++)<br/>
+        for (j = 1; j <= n; j++)<br/>
+            scanf("%d", & c[i][j]);<br/>
+    kruskal(n);<br/>
+    return 0;<br/>
+}<br/>
+
+</P>
